@@ -22,9 +22,10 @@ const TodoList = () => {
     //   id: 할일의 고유 id,
     //   text: 할일의 내용,
     //   completed: 완료 여부,
+    //   star_ed: 별표 여부,
     // }
     // ...todos => {id: 1, text: "할일1", completed: false}, {id: 2, text: "할일2", completed: false}}, ..
-    setTodos([...todos, { id: Date.now(), text: input, completed: false }]);
+    setTodos([...todos, { id: Date.now(), text: input, completed: false, star_ed: false }]);
     setInput("");
   };
 
@@ -53,6 +54,15 @@ const TodoList = () => {
     );
   };
 
+  const toggleStar = (id) => {
+
+    setTodos(
+      todos.map((todo) => {
+        return todo.id === id ? { ...todo, star_ed: !todo.star_ed } : todo;
+      })
+    )
+  }
+
   // 컴포넌트를 렌더링합니다.
   return (
     <div className={styles.container}>
@@ -64,6 +74,7 @@ const TodoList = () => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
+
       {/* 할 일을 추가하는 버튼입니다. */}
       <button className={styles.addButton} onClick={addTodo}>
         Add Todo
@@ -75,6 +86,7 @@ const TodoList = () => {
             key={todo.id}
             todo={todo}
             onToggle={() => toggleTodo(todo.id)}
+            onStar={() => toggleStar(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
           />
         ))}

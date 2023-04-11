@@ -28,6 +28,13 @@ button.addButton:hover {
   color: #0070f3;
 }
 
+button.star {
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
 .todoItem {
   display: flex;
   align-items: center;
